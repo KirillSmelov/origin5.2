@@ -1,14 +1,38 @@
 ﻿#include <iostream>
 #include<string>
 #include<windows.h>
-class Triangle
+class Figure
+{
+protected:
+    std::string name = "Фигура";
+    int a = 0;
+public:
+    Figure(int a)
+    {
+        
+    }
+    virtual void print()
+    {
+        std::cout << name << ":" << std::endl;
+ 
+    }
+    virtual void Sides()
+    {
+
+    }
+    virtual void Angles()
+    {
+
+    }
+};
+class Triangle:public Figure
 {
 protected:
     int a, b, c;
     int A, B, C;
     std::string name = "Треугольник";
 public:
-    Triangle(int a,int b,int c,int A,int B,int C)
+    Triangle(int a,int b,int c,int A,int B,int C):Figure(a)
     {
         this->a = a;
         this->b = b;
@@ -21,14 +45,20 @@ public:
     {
         return name;
     }
-    virtual void PrintSides()
+     void Sides() override
     {
         std::cout<< "Стороны: " << "a = " << a << " b = " << b << " c = " << c << std::endl;
     }
-    virtual void PrintAngles()
+     void Angles() override
     {
         std::cout << "Углы: " << " A = " << A << " B = " << B << " C = " << C << std::endl;
     }
+     void print() override
+     {
+         std::cout << GetName() << ":" << std::endl;
+         Sides();
+         Angles();
+     }
 };
 class Triangle90 :public Triangle
 {
@@ -50,11 +80,11 @@ public:
     {
         return name;
     }
-    void PrintSides() override
+    void Sides() override
     {
         std::cout << "Стороны: " << "a = " << a << " b = " << b << " c = " << c << std::endl;
     }
-    void PrintAngles() override
+    void Angles() override
     {
         std::cout << "Углы: " << " A = " << A << " B = " << B << " C = " << C << std::endl;
     }
@@ -79,11 +109,11 @@ public:
     {
         return name;
     }
-    void PrintSides() override
+    void Sides() override
     {
         std::cout << "Стороны: " << "a = " << a << " b = " << b << " c = " << c << std::endl;
     }
-    void PrintAngles() override
+    void Angles() override
     {
         std::cout << "Углы: " << " A = " << A << " B = " << B << " C = " << C << std::endl;
     }
@@ -108,23 +138,23 @@ public:
     {
         return name;
     }
-    void PrintSides() override
+    void Sides() override
     {
         std::cout << "Стороны: " << "a = " << a << " b = " << b << " c = " << c << std::endl;
     }
-    void PrintAngles() override
+    void Angles() override
     {
         std::cout << "Углы: " << " A = " << A << " B = " << B << " C = " << C << std::endl;
     }
 };
-class Quadrangle
+class Quadrangle:public Figure
 {
 protected:
     int a, b, c, d;
     int A, B, C, D;
     std::string name = "Четырёхугольник";
 public:
-    Quadrangle(int a, int b, int c, int d, int A, int B, int C, int D)
+    Quadrangle(int a, int b, int c, int d, int A, int B, int C, int D):Figure(a)
     {
         this->a = a;
         this->b = b;
@@ -139,14 +169,20 @@ public:
     {
         return name;
     }
-    virtual void PrintSides()
+     void Sides() override
     {
         std::cout << "Стороны: " << "a = " << a << " b = " << b << " c = " << c <<" d = "<<d<< std::endl;
     }
-    virtual void PrintAngles()
+     void Angles() override
     {
         std::cout << "Углы: " << " A = " << A << " B = " << B << " C = " << C <<" D = "<<D<< std::endl;
     }
+     void print() override
+     {
+         std::cout << GetName() << ":" << std::endl;
+         Sides();
+         Angles();
+     }
 };
 class Parallelogram:public Quadrangle
 {
@@ -170,14 +206,15 @@ public:
     {
         return name;
     }
-     void PrintSides() override
+     void Sides() override
     {
         std::cout << "Стороны: " << "a = " << a << " b = " << b << " c = " << c << " d = " << d << std::endl;
     }
-     void PrintAngles() override
+     void Angles() override
     {
         std::cout << "Углы: " << " A = " << A << " B = " << B << " C = " << C << " D = " << D << std::endl;
     }
+     
 };
 class Recangle:public Parallelogram
 {
@@ -201,11 +238,11 @@ public:
      {
          return name;
      }
-     void PrintSides() override
+     void Sides() override
      {
          std::cout << "Стороны: " << "a = " << a << " b = " << b << " c = " << c << " d = " << d << std::endl;
      }
-     void PrintAngles() override
+     void Angles() override
      {
          std::cout << "Углы: " << " A = " << A << " B = " << B << " C = " << C << " D = " << D << std::endl;
      }
@@ -232,11 +269,11 @@ public:
     {
         return name;
     }
-    void PrintSides() override
+    void Sides() override
     {
         std::cout << "Стороны: " << "a = " << a << " b = " << b << " c = " << c << " d = " << d << std::endl;
     }
-    void PrintAngles() override
+    void Angles() override
     {
         std::cout << "Углы: " << " A = " << A << " B = " << B << " C = " << C << " D = " << D << std::endl;
     }
@@ -263,16 +300,20 @@ public:
     {
         return name;
     }
-    void PrintSides() override
+    void Sides() override
     {
         std::cout << "Стороны: " << "a = " << a << " b = " << b << " c = " << c << " d = " << d << std::endl;
     }
-    void PrintAngles() override
+    void Angles() override
     {
         std::cout << "Углы: " << " A = " << A << " B = " << B << " C = " << C << " D = " << D << std::endl;
     }
 };
-void print_info(Triangle* figure)
+void print(Figure* figure)
+{
+    figure->print();
+}
+/*void print_info(Triangle* figure)
 {
     std::cout << figure->GetName() << std::endl;
     figure->PrintSides();
@@ -283,35 +324,35 @@ void print_info2(Quadrangle* figure)
     std::cout << figure->GetName() << std::endl;
     figure->PrintSides();
     figure->PrintAngles();
-}
+}*/
 int main()
 {
     system("chcp 1251");
     Triangle triangle(10,20,30,50,60,70);
-    print_info(&triangle);
+    print(&triangle);
     std::cout<<std::endl;
     Triangle90 triangle90(10, 20, 30, 50, 60, 90);
-    print_info(&triangle90);
+    print(&triangle90);
     std::cout << std::endl;
     IsoscelesTriangle isoscelestriangle(10, 20, 10, 50, 60, 50);
-    print_info(&isoscelestriangle);
+    print(&isoscelestriangle);
     std::cout << std::endl;
     Triangle60 triangle60(30, 30, 30,60, 60, 60);
-    print_info(&triangle60);
+    print(&triangle60);
     std::cout << std::endl;
     Quadrangle quadrangle(10, 20, 30, 40, 50, 60, 70, 80);
-    print_info2(&quadrangle);
+    print(&quadrangle);
     std::cout << std::endl;
     Recangle rectangle(10, 20, 10, 20, 90, 90, 90, 90);
-    print_info2(&rectangle);
+    print(&rectangle);
     std::cout << std::endl;
     Square square(20, 20, 20, 20, 90, 90, 90, 90);
-    print_info2(&square);
+    print(&square);
     std::cout << std::endl;
     Parallelogram parallelogram(20, 30, 20, 30, 30, 40, 30, 40);
-    print_info2(&parallelogram);
+    print(&parallelogram);
     std::cout << std::endl;
     Rhomb rhomb(30, 30, 30, 30, 30, 40, 30, 40);
-    print_info2(&rhomb);
+    print(&rhomb);
     return 0;
 }
