@@ -5,9 +5,8 @@ class Figure
 {
 protected:
     std::string name = "Фигура";
-    int a = 0;
 public:
-    Figure(int a)
+    Figure()
     {
         
     }
@@ -32,7 +31,7 @@ protected:
     int A, B, C;
     std::string name = "Треугольник";
 public:
-    Triangle(int a,int b,int c,int A,int B,int C):Figure(a)
+    Triangle(int a,int b,int c,int A,int B,int C):Figure()
     {
         this->a = a;
         this->b = b;
@@ -63,11 +62,9 @@ public:
 class Triangle90 :public Triangle
 {
 protected:
-    int a, b, c;
-    int A, B, C;
     std::string name = "Прямоугольный треугольник";
 public:
-    Triangle90(int a ,int b ,int c , int A ,int B ,int C):Triangle(a,b,c,A,B,C)
+    Triangle90(int a ,int b ,int c , int A ,int B ):Triangle(a,b,c,A,B,90)
     {
         this->a = a;
         this->b = b;
@@ -92,11 +89,9 @@ public:
 class IsoscelesTriangle :public Triangle
 {
 protected:
-    int a, b, c;
-    int A, B, C;
     std::string name = "Равнобедренный треугольник";
 public:
-    IsoscelesTriangle(int a, int b, int c, int A, int B, int C) :Triangle(a, b, c, A, B, C)
+    IsoscelesTriangle(int a, int b, int A, int B) :Triangle(a, b, a, A, B, A)
     {
         this->a = a;
         this->b = b;
@@ -121,11 +116,9 @@ public:
 class Triangle60 :public Triangle
 {
 protected:
-    int a, b, c;
-    int A, B, C;
     std::string name = "Равносторонний треугольник";
 public:
-    Triangle60(int a, int b, int c, int A, int B, int C) :Triangle(a, b, c, A, B, C)
+    Triangle60(int a) :Triangle(a, a, a, 60, 60, 60)
     {
         this->a = a;
         this->b = b;
@@ -154,7 +147,7 @@ protected:
     int A, B, C, D;
     std::string name = "Четырёхугольник";
 public:
-    Quadrangle(int a, int b, int c, int d, int A, int B, int C, int D):Figure(a)
+    Quadrangle(int a, int b, int c, int d, int A, int B, int C, int D):Figure()
     {
         this->a = a;
         this->b = b;
@@ -187,11 +180,9 @@ public:
 class Parallelogram:public Quadrangle
 {
 protected:
-    int a, b, c, d;
-    int A, B, C, D;
     std::string name = "Параллелограмм";
 public:
-    Parallelogram(int a, int b, int c, int d, int A, int B, int C, int D) :Quadrangle(a, b, c, d, A, B, C, D)
+    Parallelogram(int a, int b, int A, int B) :Quadrangle(a, b, a, b, A, B, A, B)
     {
         this->a = a;
         this->b = b;
@@ -219,11 +210,9 @@ public:
 class Recangle:public Parallelogram
 {
 protected:
-    int a, b, c, d;
-    int A, B, C, D;
     std::string name = "Прямоугольник";
 public:
-    Recangle(int a, int b, int c, int d, int A, int B, int C, int D):Parallelogram(a, b, c, d, A, B, C, D)
+    Recangle(int a, int b):Parallelogram(a, b, 90,90)
     {
         this->a = a;
         this->b = b;
@@ -250,11 +239,9 @@ public:
 class Rhomb:public Parallelogram
 {
 protected:
-    int a, b, c, d;
-    int A, B, C, D;
     std::string name = "Ромб";
 public:
-    Rhomb(int a, int b, int c, int d, int A, int B, int C, int D) :Parallelogram(a, b, c, d, A, B, C, D)
+    Rhomb(int a, int A, int B) :Parallelogram(a, a, A, B)
     {
         this->a = a;
         this->b = b;
@@ -281,11 +268,9 @@ public:
 class Square:public Rhomb
 {
 protected:
-    int a, b, c, d;
-    int A, B, C, D;
     std::string name = "Квадрат";
 public:
-    Square(int a, int b, int c, int d, int A, int B, int C, int D) :Rhomb(a, b, c, d, A, B, C, D)
+    Square(int a) :Rhomb(a,90,90)
     {
         this->a = a;
         this->b = b;
@@ -313,46 +298,34 @@ void print(Figure* figure)
 {
     figure->print();
 }
-/*void print_info(Triangle* figure)
-{
-    std::cout << figure->GetName() << std::endl;
-    figure->PrintSides();
-    figure->PrintAngles();
-}
-void print_info2(Quadrangle* figure)
-{
-    std::cout << figure->GetName() << std::endl;
-    figure->PrintSides();
-    figure->PrintAngles();
-}*/
 int main()
 {
     system("chcp 1251");
     Triangle triangle(10,20,30,50,60,70);
     print(&triangle);
     std::cout<<std::endl;
-    Triangle90 triangle90(10, 20, 30, 50, 60, 90);
+    Triangle90 triangle90(10, 20, 30, 50, 60);
     print(&triangle90);
     std::cout << std::endl;
-    IsoscelesTriangle isoscelestriangle(10, 20, 10, 50, 60, 50);
+    IsoscelesTriangle isoscelestriangle(10, 20, 50, 60);
     print(&isoscelestriangle);
     std::cout << std::endl;
-    Triangle60 triangle60(30, 30, 30,60, 60, 60);
+    Triangle60 triangle60(30);
     print(&triangle60);
     std::cout << std::endl;
     Quadrangle quadrangle(10, 20, 30, 40, 50, 60, 70, 80);
     print(&quadrangle);
     std::cout << std::endl;
-    Recangle rectangle(10, 20, 10, 20, 90, 90, 90, 90);
+    Recangle rectangle(10, 20);
     print(&rectangle);
     std::cout << std::endl;
-    Square square(20, 20, 20, 20, 90, 90, 90, 90);
+    Square square(20);
     print(&square);
     std::cout << std::endl;
-    Parallelogram parallelogram(20, 30, 20, 30, 30, 40, 30, 40);
+    Parallelogram parallelogram(20, 30, 30, 40);
     print(&parallelogram);
     std::cout << std::endl;
-    Rhomb rhomb(30, 30, 30, 30, 30, 40, 30, 40);
+    Rhomb rhomb(30, 30, 40);
     print(&rhomb);
     return 0;
 }
